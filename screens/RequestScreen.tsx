@@ -1,6 +1,6 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { Linking, ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { Divider, Text } from 'react-native-paper';
 
 import { RootStackParamList } from '../App';
@@ -21,7 +21,6 @@ export default function RequestScreen({ route }: Props) {
   const [data, setData] = useState<string | undefined>(undefined);
   const [state, setState] = useState<string | undefined>(undefined);
   const [message, setMessage] = useState<string | undefined>(undefined);
-  const [redirect, setRedirect] = useState<string | undefined>(undefined);
 
   // Sign response
   const [signature, setSignature] = useState<Uint8Array | undefined>(undefined);
@@ -58,7 +57,6 @@ export default function RequestScreen({ route }: Props) {
     setData(json.data);
     setState(json.state);
     setMessage(json.message);
-    setRedirect(json.redirect);
   }
 
   useEffect(() => {
@@ -89,9 +87,6 @@ export default function RequestScreen({ route }: Props) {
 
 
     setIsComplete(response.status.toString());
-    if (redirect) {
-      Linking.openURL(redirect)
-    }
   }
 
   useEffect(() => {
